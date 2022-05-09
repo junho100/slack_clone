@@ -4,7 +4,8 @@ import {
   Injectable,
   NestInterceptor,
 } from '@nestjs/common';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class UndefinedToNullInterceptor implements NestInterceptor {
