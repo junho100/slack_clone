@@ -3,6 +3,8 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './http-exception.filter';
+import passport from 'passport';
+import expressSession from 'express-session';
 
 declare const module: any;
 
@@ -19,7 +21,9 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-
+  app.use(expressSession);
+  app.use(passport.initialize());
+  app.use(passport.session());
   await app.listen(3000);
 
   if (module.hot) {
